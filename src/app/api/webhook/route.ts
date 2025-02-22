@@ -14,6 +14,8 @@ bot.start((ctx) => {
     ctx.reply(`Welcome ${data.user_id}!`);
 })
 bot.on(message('sticker'), (ctx) => ctx.reply('👍'))
+bot.command('token', Telegraf.reply('λ'))
+
 bot.on('text', async (ctx) => {
   const userMessage = ctx.message.text;
   const data = { user_id: ctx.message.from.id, message: userMessage };
@@ -44,7 +46,7 @@ bot.on('text', async (ctx) => {
   }
   
 });
-bot.command('token', Telegraf.reply('λ'))
+
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
