@@ -43,7 +43,7 @@ bot.command('token', async (ctx) => {
     }
 
     // Get user data and assert its type safely
-    let userData = await getUserData(ctx);
+    const userData = await getUserData(user_name);
 
     const token = getValueOfCommand(ctx.message.text, '/token');
 
@@ -64,9 +64,9 @@ bot.command('email', async (ctx) => {
     return ctx.reply('doquyen');
 });
 
-async function getUserData(ctx: any): Promise<UserData> {
+async function getUserData(username: string): Promise<UserData> {
     // Get user data and assert its type safely
-    let userData = await redis.get<UserData>(ctx.message.from.username);
+    let userData = await redis.get<UserData>(username);
 
     // If userData doesn't exist, initialize it
     if (!userData) {
