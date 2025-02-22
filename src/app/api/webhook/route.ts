@@ -51,7 +51,7 @@ bot.command('token', async (ctx) => {
 
     await redis.set(user_name, userData);
 
-    return ctx.reply('doquyen');
+    return ctx.reply(token ? `👍 Token set to: ${token}` : `👍 Token set to: ${userData.token}`);
 })
 
 bot.command('email', async (ctx) => {
@@ -76,7 +76,7 @@ async function getUserData(ctx: any): Promise<UserData> {
     return userData;
 }
 
-function getValueOfCommand(message: string, command: string) {
+function getValueOfCommand(message: string, command: string) : string | null {
     const parts = message.split(' ');
     if (parts[0] === command && parts.length > 1) {
         return parts[1];
