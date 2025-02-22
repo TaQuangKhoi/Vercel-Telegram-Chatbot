@@ -23,10 +23,10 @@ bot.start((ctx) => {
 
     if (data.user_name == 'TaQuangKhoi') {
       return ctx.reply(`
-        Hi Anna! 🌟
-        You're not just any user—you're the reason I exist!
-        Excited to help you bring your amazing ideas to life in Napkin.
-        Let's create something wonderful together! 🚀
+Hi Anna! 🌟
+You're not just any user—you're the reason I exist!
+Excited to help you bring your amazing ideas to life in Napkin.
+Let's create something wonderful together! 🚀
       `);
     }
 
@@ -87,13 +87,13 @@ bot.command('setEmail', async (ctx) => {
 
 bot.help((ctx) => ctx.reply(
   `
-  I can help you create thoughts in Napkin!
+I can help you create thoughts in Napkin!
 
-  You can control your thoughts by sending these commands:
+You can control your thoughts by sending these commands:
 
-  **Edit Settings:**
-  /setToken <token> - Set your Napkin token
-  /setEmail <email> - Set your Napkin email
+*Edit Settings:*
+/setToken <token> - Set your Napkin token
+/setEmail <email> - Set your Napkin email
 
   `
 ));
