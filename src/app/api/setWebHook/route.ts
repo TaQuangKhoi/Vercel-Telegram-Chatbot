@@ -10,5 +10,5 @@ export async function GET(req: NextRequest) {
 
     const data = await response.json();
     
-    return new Response(null, { status: 200 });
+    return new Response(null, data);
 }
