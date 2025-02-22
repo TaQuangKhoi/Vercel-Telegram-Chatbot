@@ -76,6 +76,8 @@ bot.command('setEmail', async (ctx) => {
     return ctx.reply(`👍 Email set to: ${value}`);
 });
 
+bot.help((ctx) => ctx.reply('Send me a sticker'))
+
 async function getUserData(username: string): Promise<UserData> {
     // Get user data and assert its type safely
     let userData = await redis.get<UserData>(username);
