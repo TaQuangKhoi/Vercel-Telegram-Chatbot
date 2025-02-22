@@ -117,6 +117,13 @@ You can control your thoughts by sending these commands:
 *View Stats:*
 /countMyThoughts - View your thought count
 /countSystemThoughts - View the system thought count
+
+*Create Thoughts:*
+Just send me a message and I'll create a thought for you!
+
+Need help?
+Contact @TaQuangKhoi
+My source code: [GitHub](https://github.com/TaQuangKhoi/Napkin.one-Telegram-Chatbot)
   `, { parse_mode: 'Markdown' }
 ));
 
