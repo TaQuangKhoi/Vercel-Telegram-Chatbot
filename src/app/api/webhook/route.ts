@@ -60,6 +60,8 @@ bot.command('email', async (ctx) => {
     if (!user_name) {
         return ctx.reply('⚠️ Please set a Telegram username first!');
     }
+
+    return ctx.reply('doquyen');
 });
 
 async function getUserData(ctx: any): Promise<UserData> {
