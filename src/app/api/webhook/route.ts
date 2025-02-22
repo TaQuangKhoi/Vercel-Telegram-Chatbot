@@ -42,6 +42,7 @@ bot.on(message('sticker'), async (ctx) => {
 type UserData = {
     token: string;
     email?: string;
+    thoughts?: number;
 };
 
 bot.command('setToken', async (ctx) => {
@@ -85,6 +86,24 @@ bot.command('setEmail', async (ctx) => {
     return ctx.reply(`👍 Email set to: ${value}`);
 });
 
+bot.command('countMyThoughts', async (ctx) => {
+    const user_name = ctx.message.from.username;
+
+    if (!user_name) {
+      return ctx.reply('⚠️ Please set a Telegram username first!');
+    }
+
+    const userData = await getUserData(user_name);
+    const thoughts = userData.thoughts || 0;
+
+    return ctx.reply(`You have created ${thoughts} thoughts!`);
+});
+
+bot.command('countSystemThoughts', async (ctx) => {
+    const thoughts = await redis.get('thoughts');
+    return ctx.reply(`The system has created ${thoughts} thoughts!`);
+});
+
 bot.help((ctx) => ctx.reply(
   `
 I can help you create thoughts in Napkin!
@@ -95,6 +114,9 @@ You can control your thoughts by sending these commands:
 /setToken <token> - Set your Napkin token
 /setEmail <email> - Set your Napkin email
 
+*View Stats:*
+/countMyThoughts - View your thought count
+/countSystemThoughts - View the system thought count
   `, { parse_mode: 'Markdown' }
 ));
 
@@ -151,7 +173,13 @@ bot.on('text', async (ctx) => {
     console.log('Status: ', send_thought_data.status);
 
     if (send_thought_data.status === 200) {
+      // Update user thoughts count
+      userData.thoughts = (userData.thoughts || 0) + 1;
+      await redis.set(user_name, userData);
+
+      // Update system thoughts count
       await redis.incr('thoughts');
+
       await ctx.reply(`Thought sent successfully! Direct link: ${send_thought_data.data.url}`);
     } else {
       await ctx.reply('Failed to send data');
