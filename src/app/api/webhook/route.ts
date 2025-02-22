@@ -24,7 +24,7 @@ bot.on('text', async (ctx) => {
   
 });
 
-export async function POST(req: NextRequest) {
+export async function GET(req: NextRequest) {
   const body = await req.json();
   await bot.handleUpdate(body);
   return new Response(null, { status: 200 });
