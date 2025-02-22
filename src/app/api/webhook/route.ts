@@ -131,7 +131,7 @@ After creating the thought, I'll also create a direct link for you to view it in
 
 Need help?
 Contact @TaQuangKhoi
-My source code: [GitHub](https://github.com/TaQuangKhoi/Napkin.one-Telegram-Chatbot)
+My source code: [Napkin.one-Telegram-Chatbot](https://github.com/TaQuangKhoi/Napkin.one-Telegram-Chatbot)
   `, { parse_mode: 'Markdown' }
 ));
 
