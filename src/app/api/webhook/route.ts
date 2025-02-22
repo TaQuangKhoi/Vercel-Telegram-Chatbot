@@ -24,7 +24,9 @@ bot.on('text', async (ctx) => {
         }
     });
     
-    await ctx.reply(send_thought_data);
+    await ctx.reply(
+        JSON.stringify(send_thought_data.data, null, 2)
+    );
   } catch (error) {
     if (error instanceof Error) {
       await ctx.reply(`Failed to send data: ${error.message}`);
