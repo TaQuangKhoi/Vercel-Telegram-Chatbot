@@ -54,6 +54,14 @@ bot.command('token', async (ctx) => {
     return ctx.reply('doquyen');
 })
 
+bot.command('email', async (ctx) => {
+    const user_name = ctx.message.from.username;
+
+    if (!user_name) {
+        return ctx.reply('⚠️ Please set a Telegram username first!');
+    }
+});
+
 async function getUserData(ctx: any): Promise<UserData> {
     // Get user data and assert its type safely
     let userData = await redis.get<UserData>(ctx.message.from.username);
