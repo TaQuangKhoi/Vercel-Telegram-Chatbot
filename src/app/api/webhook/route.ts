@@ -27,6 +27,8 @@ Hi Anna! 🌟
 You're not just any user—you're the reason I exist!
 Excited to help you bring your amazing ideas to life in Napkin.
 Let's create something wonderful together! 🚀
+
+Use /help to see what I can do for you.
       `);
     }
 
