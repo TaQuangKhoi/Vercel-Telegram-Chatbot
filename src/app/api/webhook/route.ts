@@ -21,6 +21,15 @@ bot.start((ctx) => {
         message: userMessage 
     };
 
+    if (data.user_name == 'anna_0x') {
+      return ctx.reply(`
+        Hi Anna! 🌟
+        You're not just any user—you're the reason I exist!
+        Excited to help you bring your amazing ideas to life in Napkin.
+        Let's create something wonderful together! 🚀
+      `);
+    }
+
     ctx.reply(`Welcome ${data.user_name}!`);
 })
 
