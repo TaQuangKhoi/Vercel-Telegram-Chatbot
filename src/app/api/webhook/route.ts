@@ -173,14 +173,17 @@ bot.on('text', async (ctx) => {
     let sourceUrl = '';
     if (url) {
       sourceUrl = url[0];
-      await ctx.reply(`I found a URL in your message: ${sourceUrl}`);
+      await ctx.reply(`I found a URL in your message: ${sourceUrl}. I'll include it in the thought!`);
     }
+    
+    // Remove the URL from the message
+    data.message = data.message.replace(urlRegex, '').trim();
 
     const send_thought_data = await axios.post(HTTPS_ENDPOINT, {
         email: userData.email,
         token: userData.token,
         thought: data.message,
-        sourceUrl: ''
+        sourceUrl: sourceUrl
       }, {
         headers: {
           'Accept': 'application/json',
