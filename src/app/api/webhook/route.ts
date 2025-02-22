@@ -29,9 +29,32 @@ bot.on(message('sticker'), async (ctx) => {
     ctx.reply(`👍 ${foo}`);
 })
 
+// Define a type for your user data
+type UserData = {
+    token: string;
+    email?: string;
+};
+
 bot.command('token', async (ctx) => {
-    await redis.set('foo', 'bar');
-    return ctx.reply(ctx.message.from.username? `👍 ${ctx.message.from.username}` : '');
+    const user_name = ctx.message.from.username;
+
+    if (!user_name) {
+        return ctx.reply('⚠️ Please set a Telegram username first!');
+    }
+
+    // Get user data and assert its type safely
+    let userData = await redis.get<UserData>(user_name);
+
+    // If userData doesn't exist, initialize it
+    if (!userData) {
+        userData = { token: '', email: '' };
+    }
+
+    userData.token = Math.random().toString(36).substring(7);
+
+    await redis.set(user_name, userData);
+
+    return ctx.reply(ctx.message.text);
 })
 
 bot.on('text', async (ctx) => {
