@@ -104,11 +104,23 @@ bot.on('text', async (ctx) => {
 //   await redis.incr('thoughts_sent');
 
   try {
+    const user_name = ctx.message.from.username;
+
+    if (!user_name) {
+      return ctx.reply('⚠️ Please set a Telegram username first!');
+    }
+
+    // Get user data and assert its type safely
+    const userData = await getUserData(user_name);
+    if (!userData.email || !userData.token) {
+      return ctx.reply('⚠️ Please set a token and an email first using /setToken and /setEmail');
+    }
+
     const send_thought_data = await axios.post(HTTPS_ENDPOINT, {
-        email: 'leonardo@davinci.it',
-        token: 'macchina-dettatura-ec1air8wcr',
-        thought: 'The natural desire of good men is knowledge.',
-        sourceUrl: 'https://thevisualagency.com/works/decoding-leonardo-da-vinci-for-the-world/'
+        email: userData.email,
+        token: userData.token,
+        thought: data.message,
+        sourceUrl: ''
       }, {
         headers: {
           'Accept': 'application/json',
