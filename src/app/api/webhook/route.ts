@@ -30,7 +30,11 @@ Let's create something wonderful together! 🚀
       `);
     }
 
-    ctx.reply(`Welcome ${data.user_name}!`);
+    ctx.reply(
+      `
+Welcome ${data.user_name}! 🌟
+Use /help to see what I can do for you.
+      `);
 })
 
 bot.on(message('sticker'), async (ctx) => {
@@ -175,7 +179,7 @@ bot.on('text', async (ctx) => {
       sourceUrl = url[0];
       await ctx.reply(`I found a URL in your message: ${sourceUrl}. I'll include it in the thought!`);
     }
-    
+
     // Remove the URL from the message
     data.message = data.message.replace(urlRegex, '').trim();
 
