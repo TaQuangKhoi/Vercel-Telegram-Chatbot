@@ -7,7 +7,9 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
-		"preact": "^10.25.3"
+		"axios": "^1.7.9",
+		"preact": "^10.25.3",
+		"telegraf": "^4.16.3"
 	},
 	"devDependencies": {
 		"@preact/preset-vite": "^2.9.3",
