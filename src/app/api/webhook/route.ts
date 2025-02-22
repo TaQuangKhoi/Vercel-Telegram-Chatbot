@@ -120,6 +120,8 @@ You can control your thoughts by sending these commands:
 
 *Create Thoughts:*
 Just send me a message and I'll create a thought for you!
+If you include a URL in your message, I'll include it in the thought.
+After creating the thought, I'll also create a direct link for you to view it in Napkin.
 
 Need help?
 Contact @TaQuangKhoi
