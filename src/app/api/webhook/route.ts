@@ -50,11 +50,15 @@ bot.command('token', async (ctx) => {
         userData = { token: '', email: '' };
     }
 
+    const userMessage = ctx.message.text;
+    const token = userMessage.split(' ')[1];
+    console.log(token);
+
     userData.token = Math.random().toString(36).substring(7);
 
     await redis.set(user_name, userData);
 
-    return ctx.reply(ctx.message.text);
+    return ctx.reply();
 })
 
 bot.on('text', async (ctx) => {
