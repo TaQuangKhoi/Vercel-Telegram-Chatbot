@@ -84,7 +84,7 @@ bot.command('setEmail', async (ctx) => {
     const userData = await getUserData(user_name);
     const value = getValueOfCommand(ctx.message.text, '/setEmail');
     if (!value) {
-      return ctx.reply('⚠️ Please provide a email!');
+      return ctx.reply('⚠️ Please provide an email!');
     }
     userData.email = value;
     await redis.set(user_name, userData);
