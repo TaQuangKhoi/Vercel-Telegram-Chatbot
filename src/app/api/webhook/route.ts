@@ -44,7 +44,7 @@ bot.on('text', async (ctx) => {
   }
   
 });
-bot.hears('hi', (ctx) => ctx.reply('Hey there'))
+bot.command('token', Telegraf.reply('λ'))
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
