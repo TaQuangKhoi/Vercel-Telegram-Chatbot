@@ -158,7 +158,6 @@ function getValueOfCommand(message: string, command: string) : string | null {
 bot.on('text', async (ctx) => {
   const userMessage = ctx.message.text;
   const data = { user_id: ctx.message.from.id, message: userMessage };
-  console.log(data);
 
   try {
     const user_name = ctx.message.from.username;
@@ -196,8 +195,6 @@ bot.on('text', async (ctx) => {
           'Content-Type': 'application/json'
         }
     });
-    
-    console.log('Status: ', send_thought_data.status);
 
     if (send_thought_data.status === 200) {
       // Update user thoughts count
