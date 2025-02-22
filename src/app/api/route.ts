@@ -1,3 +1,4 @@
 export async function GET(request: Request) {
-    return Response.json({ doQuyen : true })
+    console.log(request);
+    return Response.json({ doQuyen : true });
 }
