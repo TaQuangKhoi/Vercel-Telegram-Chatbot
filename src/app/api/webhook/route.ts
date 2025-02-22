@@ -58,7 +58,7 @@ bot.command('token', async (ctx) => {
 
     await redis.set(user_name, userData);
 
-    return ctx.reply();
+    return ctx.reply('doquyen');
 })
 
 bot.on('text', async (ctx) => {
