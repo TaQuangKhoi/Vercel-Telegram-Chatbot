@@ -15,8 +15,13 @@ bot.on('text', async (ctx) => {
     console.log(data);
     await ctx.reply('Data sent successfully!');
   } catch (error) {
-    await ctx.reply(`Failed to send data: ${error.message}`);
+    if (error instanceof Error) {
+      await ctx.reply(`Failed to send data: ${error.message}`);
+    } else {
+      await ctx.reply('Failed to send data: Unknown error');
+    }
   }
+  
 });
 
 export async function POST(req: NextRequest) {
