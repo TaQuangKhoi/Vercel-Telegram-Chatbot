@@ -95,7 +95,7 @@ You can control your thoughts by sending these commands:
 /setToken <token> - Set your Napkin token
 /setEmail <email> - Set your Napkin email
 
-  `
+  `, { parse_mode: 'Markdown' }
 ));
 
 async function getUserData(username: string): Promise<UserData> {
