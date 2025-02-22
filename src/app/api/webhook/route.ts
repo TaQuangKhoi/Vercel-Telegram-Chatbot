@@ -35,7 +35,7 @@ type UserData = {
     email?: string;
 };
 
-bot.command('token', async (ctx) => {
+bot.command('setToken', async (ctx) => {
     const user_name = ctx.message.from.username;
 
     if (!user_name) {
@@ -45,27 +45,35 @@ bot.command('token', async (ctx) => {
     // Get user data and assert its type safely
     const userData = await getUserData(user_name);
 
-    const token = getValueOfCommand(ctx.message.text, '/token');
+    const value = getValueOfCommand(ctx.message.text, '/setToken');
     
-    if (!token) {
+    if (!value) {
       return ctx.reply('⚠️ Please provide a token!');
     }
 
-    userData.token = token;
+    userData.token = value;
 
     await redis.set(user_name, userData);
 
-    return ctx.reply(token ? `👍 Token set to: ${token}` : `👍 Token set to: ${userData.token}`);
+    return ctx.reply(`👍 Token set to: ${value}`);
 })
 
-bot.command('email', async (ctx) => {
+bot.command('setEmail', async (ctx) => {
     const user_name = ctx.message.from.username;
 
     if (!user_name) {
-        return ctx.reply('⚠️ Please set a Telegram username first!');
+      return ctx.reply('⚠️ Please set a Telegram username first!');
     }
 
-    return ctx.reply('doquyen');
+    const userData = await getUserData(user_name);
+    const value = getValueOfCommand(ctx.message.text, '/setEmail');
+    if (!value) {
+      return ctx.reply('⚠️ Please provide a email!');
+    }
+    userData.email = value;
+    await redis.set(user_name, userData);
+
+    return ctx.reply(`👍 Email set to: ${value}`);
 });
 
 async function getUserData(username: string): Promise<UserData> {
