@@ -43,12 +43,7 @@ bot.command('token', async (ctx) => {
     }
 
     // Get user data and assert its type safely
-    let userData = await redis.get<UserData>(user_name);
-
-    // If userData doesn't exist, initialize it
-    if (!userData) {
-        userData = { token: '', email: '' };
-    }
+    let userData = getUserData(ctx);
 
     const token = getValueOfCommand(ctx.message.text, '/token');
 
@@ -58,6 +53,18 @@ bot.command('token', async (ctx) => {
 
     return ctx.reply('doquyen');
 })
+
+async function getUserData(ctx: any): Promise<UserData> {
+    // Get user data and assert its type safely
+    let userData = await redis.get<UserData>(ctx.message.from.username);
+
+    // If userData doesn't exist, initialize it
+    if (!userData) {
+        userData = { token: '', email: '' };
+    }
+
+    return userData;
+}
 
 function getValueOfCommand(message: string, command: string) {
     const parts = message.split(' ');
