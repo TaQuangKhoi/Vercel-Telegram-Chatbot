@@ -5,7 +5,7 @@ import { Telegraf } from 'telegraf';
 const BOT_TOKEN = process.env.TELEGRAM_TOKEN;
 // const HTTPS_ENDPOINT = 'https://your-api-endpoint.com/data';
 
-const bot = new Telegraf(BOT_TOKEN);
+const bot = new Telegraf(process.env.TELEGRAM_TOKEN as string);
 
 bot.on('text', async (ctx) => {
   const userMessage = ctx.message.text;
