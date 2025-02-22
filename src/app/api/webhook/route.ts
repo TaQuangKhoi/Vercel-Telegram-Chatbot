@@ -112,7 +112,7 @@ bot.on('text', async (ctx) => {
 
     // Get user data and assert its type safely
     const userData = await getUserData(user_name);
-    if (!userData.email || !userData.token) {
+    if (userData.email?.length == 0 || userData.token == '') {
       return ctx.reply('⚠️ Please set a token and an email first using /setToken and /setEmail');
     }
 
