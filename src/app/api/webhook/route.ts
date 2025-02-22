@@ -15,9 +15,13 @@ const bot = new Telegraf(process.env.TELEGRAM_TOKEN as string);
 
 bot.start((ctx) => {
     const userMessage = ctx.message.text;
-    const data = { user_id: ctx.message.from.id, message: userMessage };
+    const data = { 
+        user_id: ctx.message.from.id, 
+        user_name: ctx.message.from.username,
+        message: userMessage 
+    };
 
-    ctx.reply(`Welcome ${data.user_id}!`);
+    ctx.reply(`Welcome ${data.user_name}!`);
 })
 
 bot.on(message('sticker'), async (ctx) => {
