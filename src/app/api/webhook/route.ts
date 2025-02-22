@@ -76,7 +76,18 @@ bot.command('setEmail', async (ctx) => {
     return ctx.reply(`👍 Email set to: ${value}`);
 });
 
-bot.help((ctx) => ctx.reply('Send me a sticker'))
+bot.help((ctx) => ctx.reply(
+  `
+  I can help you create thoughts in Napkin!
+
+  You can control your thoughts by sending these commands:
+
+  **Edit Settings:**
+  /setToken <token> - Set your Napkin token
+  /setEmail <email> - Set your Napkin email
+
+  `
+));
 
 async function getUserData(username: string): Promise<UserData> {
     // Get user data and assert its type safely
