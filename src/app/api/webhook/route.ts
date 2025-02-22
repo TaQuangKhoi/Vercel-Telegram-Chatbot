@@ -50,9 +50,7 @@ bot.command('token', async (ctx) => {
         userData = { token: '', email: '' };
     }
 
-    const userMessage = ctx.message.text;
-    const token = userMessage.split(' ')[1];
-    console.log(token);
+    const token = getValueOfCommand(ctx.message.text, '/token');
 
     userData.token = Math.random().toString(36).substring(7);
 
@@ -60,6 +58,14 @@ bot.command('token', async (ctx) => {
 
     return ctx.reply('doquyen');
 })
+
+function getValueOfCommand(message: string, command: string) {
+    const parts = message.split(' ');
+    if (parts[0] === command && parts.length > 1) {
+        return parts[1];
+    }
+    return null; // or any default value you'd like
+}
 
 bot.on('text', async (ctx) => {
   const userMessage = ctx.message.text;
