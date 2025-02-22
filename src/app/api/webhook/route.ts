@@ -39,6 +39,8 @@ bot.on('text', async (ctx) => {
   const data = { user_id: ctx.message.from.id, message: userMessage };
   console.log(data);
 
+//   await redis.incr('thoughts_sent');
+
   try {
     const send_thought_data = await axios.post(HTTPS_ENDPOINT, {
         email: 'leonardo@davinci.it',
@@ -52,6 +54,8 @@ bot.on('text', async (ctx) => {
         }
     });
     
+    console.log('Status: ', send_thought_data.status);
+
     await ctx.reply(
         JSON.stringify(send_thought_data.data, null, 2)
     );
