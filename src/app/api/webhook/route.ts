@@ -2,6 +2,12 @@ import { NextRequest } from 'next/server';
 import { Telegraf } from 'telegraf';
 import axios from 'axios';
 import { message } from 'telegraf/filters';
+import { Redis } from '@upstash/redis'
+
+const redis = new Redis({
+    url: process.env.KV_REST_API_URL,
+    token: process.env.KV_REST_API_TOKEN,
+})
 
 const HTTPS_ENDPOINT = 'https://app.napkin.one/api/createThought';
 
@@ -13,8 +19,16 @@ bot.start((ctx) => {
 
     ctx.reply(`Welcome ${data.user_id}!`);
 })
-bot.on(message('sticker'), (ctx) => ctx.reply('👍'))
-bot.command('token', Telegraf.reply('λ'))
+
+bot.on(message('sticker'), async (ctx) => {
+    const foo = await redis.get('foo');
+    ctx.reply(`👍 ${foo}`);
+})
+
+bot.command('token', async (ctx) => {
+    await redis.set('foo', 'bar');
+    return ctx.reply('λ')
+})
 
 bot.on('text', async (ctx) => {
   const userMessage = ctx.message.text;
