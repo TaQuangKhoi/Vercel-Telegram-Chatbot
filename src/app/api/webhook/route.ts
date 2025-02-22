@@ -21,7 +21,7 @@ bot.start((ctx) => {
         message: userMessage 
     };
 
-    if (data.user_name == 'anna_0x') {
+    if (data.user_name == 'TaQuangKhoi') {
       return ctx.reply(`
         Hi Anna! 🌟
         You're not just any user—you're the reason I exist!
