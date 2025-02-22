@@ -46,8 +46,12 @@ bot.command('token', async (ctx) => {
     const userData = await getUserData(user_name);
 
     const token = getValueOfCommand(ctx.message.text, '/token');
+    
+    if (!token) {
+      return ctx.reply('⚠️ Please provide a token!');
+    }
 
-    userData.token = Math.random().toString(36).substring(7);
+    userData.token = token;
 
     await redis.set(user_name, userData);
 
