@@ -43,7 +43,7 @@ bot.command('token', async (ctx) => {
     }
 
     // Get user data and assert its type safely
-    let userData = getUserData(ctx);
+    let userData = await getUserData(ctx);
 
     const token = getValueOfCommand(ctx.message.text, '/token');
 
