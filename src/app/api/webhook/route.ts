@@ -101,8 +101,6 @@ bot.on('text', async (ctx) => {
   const data = { user_id: ctx.message.from.id, message: userMessage };
   console.log(data);
 
-//   await redis.incr('thoughts_sent');
-
   try {
     const user_name = ctx.message.from.username;
 
@@ -130,9 +128,12 @@ bot.on('text', async (ctx) => {
     
     console.log('Status: ', send_thought_data.status);
 
-    await ctx.reply(
-        JSON.stringify(send_thought_data.data, null, 2)
-    );
+    if (send_thought_data.status === 200) {
+      await redis.incr('thoughts');
+      await ctx.reply(`Thought sent successfully! Direct link: ${send_thought_data.data.url}`);
+    } else {
+      await ctx.reply('Failed to send data');
+    }
   } catch (error) {
     if (error instanceof Error) {
       await ctx.reply(`Failed to send data: ${error.message}`);
