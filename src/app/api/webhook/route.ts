@@ -165,6 +165,15 @@ bot.on('text', async (ctx) => {
       return ctx.reply('⚠️ Please set a token and an email first using /setToken and /setEmail');
     }
 
+    // check if there's an url in the message
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    const url = userMessage.match(urlRegex);
+    let sourceUrl = '';
+    if (url) {
+      sourceUrl = url[0];
+      await ctx.reply(`I found a URL in your message: ${sourceUrl}`);
+    }
+
     const send_thought_data = await axios.post(HTTPS_ENDPOINT, {
         email: userData.email,
         token: userData.token,
