@@ -27,7 +27,7 @@ bot.on(message('sticker'), async (ctx) => {
 
 bot.command('token', async (ctx) => {
     await redis.set('foo', 'bar');
-    return ctx.reply('λ')
+    return ctx.reply(ctx.message.from.id.toString())
 })
 
 bot.on('text', async (ctx) => {
