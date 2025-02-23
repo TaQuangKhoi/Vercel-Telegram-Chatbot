@@ -6,13 +6,14 @@ import { useState, useEffect } from "react";
 
 export default function Home() {
   const [thoughtsCount, setThoughtsCount] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchThoughts = async () => {
       try {
         const response = await axios.get("/api/count/systemThoughts");
-        console.log("Thoughts count:", response.data);
         setThoughtsCount(response.data.thoughts || 0);
+        setLoading(false); // Only set loading to false after first fetch
       } catch (error) {
         console.error("Error fetching thoughts count:", error);
       }
@@ -37,7 +38,7 @@ export default function Home() {
         />
         <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2">
-            The system has {thoughtsCount} thoughts.
+            The system has {loading ? "..." : thoughtsCount} thoughts.
           </li>
           <li>Save and see your changes instantly.</li>
         </ol>
