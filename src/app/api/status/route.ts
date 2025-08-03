@@ -12,7 +12,7 @@ export async function GET() {
       redis: redisPing === 'PONG' ? 'ok' : 'error',
     };
     return NextResponse.json(status);
-  } catch (_error) {
+  } catch {
     return NextResponse.json({ status: 'error', redis: 'disconnected' }, { status: 500 });
   }
 }
