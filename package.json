@@ -1,7 +1,8 @@
 {
-  "name": "napkin-one-telegram-bot",
-  "version": "0.1.0",
+  "name": "vercel-telegram-bot-template",
+  "version": "1.0.0",
   "private": true,
+  "description": "A Next.js template for building Telegram bots, ready to deploy on Vercel with Upstash Redis integration.",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
