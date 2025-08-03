@@ -1,36 +1,91 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Telegram Bot Template for Vercel
 
-## Getting Started
+This is a template for bootstrapping a Telegram bot using the [Next.js App Router](https://nextjs.org/docs/app), ready to be hosted on [Vercel](https://vercel.com/). It uses [Upstash Redis](https://upstash.com/redis) for persistent data storage (e.g., user settings) and [Telegraf](https://telegraf.js.org/) as the Telegram bot framework.
 
-First, run the development server:
+## Features
+
+- **Next.js 15:** Utilizes the App Router for API routes.
+- **Vercel Edge Functions:** The webhook logic is designed to run on Vercel's Edge Network for fast responses.
+- **Telegraf:** A powerful and modern framework for building Telegram bots.
+- **Upstash Redis:** Serverless Redis database for storing state, included in Vercel's free plan.
+- **TypeScript:** Fully typed codebase.
+- **Easy Setup:** Get your bot running in minutes.
+
+## Setup and Deployment
+
+### 1. Prerequisites
+
+- A [Telegram Bot](https://core.telegram.org/bots#how-do-i-create-a-bot). Talk to [@BotFather](https://t.me/BotFather) to create one and get your `TELEGRAM_TOKEN`.
+- A [Vercel Account](https://vercel.com/signup).
+- An [Upstash Redis Database](https://console.upstash.com/redis). You can create one for free from the Upstash console or via the Vercel marketplace.
+
+### 2. Click to Deploy
+
+The easiest way to get started is to click the button below to deploy this template directly to Vercel.
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FTaQuangKhoi%2FNapkin.one-Telegram-Chatbot&env=TELEGRAM_TOKEN,KV_REST_API_URL,KV_REST_API_TOKEN&project-name=my-telegram-bot&repository-name=my-telegram-bot)
+
+Vercel will guide you through cloning the repository and setting up the required environment variables.
+
+### 3. Manual Setup
+
+If you prefer to set it up manually:
+
+**a. Clone the repository:**
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone [https://github.com/TaQuangKhoi/Napkin.one-Telegram-Chatbot.git](https://github.com/TaQuangKhoi/Napkin.one-Telegram-Chatbot.git) my-telegram-bot
+cd my-telegram-bot
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**b. Create an environment file:**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Copy the `.env.example` file to a new file named `.env.local`:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+cp .env.example .env.local
+```
 
-## Learn More
+**c. Fill in your environment variables in `.env.local`:**
 
-To learn more about Next.js, take a look at the following resources:
+- `TELEGRAM_TOKEN`: Your token from BotFather.
+- `KV_REST_API_URL`: Your Upstash Redis REST API URL.
+- `KV_REST_API_TOKEN`: Your Upstash Redis REST API Token.
+- `VERCEL_URL`: For local development, set this to your ngrok or equivalent tunnelling service URL. When deploying to Vercel, this is set automatically.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**d. Install dependencies and run locally:**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm install
+npm run dev
+```
 
-## Deploy on Vercel
+### 4. Set the Webhook
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+After you have deployed your project to Vercel, you need to tell Telegram where to send updates.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Open your browser and visit the following URL:
+
+`https://<YOUR_VERCEL_DEPLOYMENT_URL>/api/setWebHook`
+
+This will register your bot's webhook with the Telegram API. You only need to do this once.
+
+## Customizing the Bot
+
+All the core bot logic is located in `/src/app/api/webhook/route.ts`.
+
+You can add new commands or listeners easily using Telegraf's methods.
+
+```typescript
+// in /src/app/api/webhook/route.ts
+
+// Add a new command
+bot.command('custom', (ctx) => {
+  ctx.reply('This is a custom command!');
+});
+
+// Listen for photo messages
+bot.on(message('photo'), (ctx) => {
+  ctx.reply('Nice picture!');
+});
+```
