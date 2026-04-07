@@ -1,0 +1,20 @@
+{
+	"servers": {
+		"next-devtools": {
+			"command": "npx",
+			"args": [
+				"-y",
+				"next-devtools-mcp@latest"
+			],
+			"sandboxEnabled": false,
+			"type": "stdio"
+		}
+	},
+	"inputs": [
+		{
+			"id": "cwd",
+			"type": "promptString",
+			"description": "What is the working directory for the server command?"
+		}
+	]
+}
